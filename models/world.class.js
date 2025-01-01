@@ -1,6 +1,7 @@
 class World {
   character = new Character();
   enemies = [new Chicken(), new Chicken(), new Chicken()];
+  clouds = [new Cloud()];
   canvas; //benötigt zum reclear
   ctx;
   constructor(canvas) {
@@ -19,6 +20,7 @@ class World {
       this.character.width,
       this.character.height
     );
+
     //jeder enemy wird einzeln gezeichnet also 3xchicken
     this.enemies.forEach((enemy) => {
       this.ctx.drawImage(
@@ -29,6 +31,17 @@ class World {
         enemy.height
       );
     });
+
+    this.clouds.forEach((cloud) => {
+      this.ctx.drawImage(
+        cloud.img,
+        cloud.x,
+        cloud.y,
+        cloud.width,
+        cloud.height
+      );
+    });
+
     //draw() wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function () {
