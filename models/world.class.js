@@ -2,50 +2,49 @@ class World {
   character = new Character();
   enemies = [new Chicken(), new Chicken(), new Chicken()];
   clouds = [new Cloud()];
+  backgroundObjects = [
+    new BackgroundObject(
+      "img_pollo_locco/img/5_background/layers/3_third_layer/1.png",
+      0,
+      100
+    ),
+  ];
   canvas; //benötigt zum reclear
   ctx;
+
   constructor(canvas) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas; //benötigt zum reclear
     this.draw();
   }
+
   draw() {
     //reclear canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.drawImage(
-      this.character.img,
-      this.character.x,
-      this.character.y,
-      this.character.width,
-      this.character.height
-    );
+    this.addToMap(this.character);
 
-    //jeder enemy wird einzeln gezeichnet also 3xchicken
-    this.enemies.forEach((enemy) => {
-      this.ctx.drawImage(
-        enemy.img,
-        enemy.x,
-        enemy.y,
-        enemy.width,
-        enemy.height
-      );
-    });
-
-    this.clouds.forEach((cloud) => {
-      this.ctx.drawImage(
-        cloud.img,
-        cloud.x,
-        cloud.y,
-        cloud.width,
-        cloud.height
-      );
-    });
+    //Objekte werden hinzugefügt
+    this.addObjectsToMap(this.clouds);
+    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.backgroundObjects);
 
     //draw() wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  //wiederkehrende funktion die für die Objekte verwendet werden
+  addObjectsToMap(objects) {
+    objects.forEach((o) => {
+      this.addToMap(o);
+    });
+  }
+
+  //MoveableObject
+  addToMap(mo) {
+    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
   }
 }
