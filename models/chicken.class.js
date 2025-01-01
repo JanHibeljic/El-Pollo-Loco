@@ -1,5 +1,7 @@
 class Chicken extends MoveableObject {
-  y = 290;
+  y = 355;
+  height = 70;
+  width = 60;
 
   constructor() {
     super().loadImage(
