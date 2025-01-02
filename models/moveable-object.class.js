@@ -17,7 +17,7 @@ class MoveableObject {
     arr.forEach((path) => {
       let img = new Image();
       img.src = path;
-      this.imageCache[path] = path; //vorher this.imageCache.push(img); array geändert zu JSON
+      this.imageCache[path] = img; //vorher this.imageCache.push(img); array geändert zu JSON
     });
   }
 
