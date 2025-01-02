@@ -20,6 +20,7 @@ class World {
   canvas; //benötigt zum reclear
   ctx;
   keyboard;
+  camera_x = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -37,11 +38,17 @@ class World {
     //reclear canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    //camera wird links verschoben
+    this.ctx.translate(this.camera_x, 0);
+
     //Objekte werden hinzugefügt
     this.addObjectsToMap(this.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.clouds);
     this.addObjectsToMap(this.enemies);
+
+    //camera wurde links verschoben, die Elemente gezeichnet, dann drehen wir die cameraverschiebung -> fängt wieder oben beim links verschieben an
+    this.ctx.translate(-this.camera_x, 0);
 
     //draw() wird immer wieder aufgerufen
     let self = this;
