@@ -10,8 +10,6 @@ class Character extends MoveableObject {
     "img_pollo_locco/img/2_character_pepe/2_walk/W-26.png",
   ];
 
-  currentImage = 0;
-
   constructor() {
     super().loadImage("img_pollo_locco/img/2_character_pepe/2_walk/W-21.png");
 
@@ -27,7 +25,7 @@ class Character extends MoveableObject {
       let path = this.IMAGES_WALKING[i]; // anstatt [i] war vorher [this.currentImage]
       this.img = this.imageCache[path];
       this.currentImage++;
-    }, 100); //ms
+    }, 1000); //ms
   }
 
   jump() {}
