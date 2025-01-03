@@ -40,14 +40,15 @@ class MoveableObject {
   }
 
   moveRight() {
-    console.log("moving right");
+    this.x += this.speed;
   }
 
-  //Wolken bewegen sich nach links
   moveLeft() {
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / 60);
+    this.x -= this.speed;
+  }
+
+  jump() {
+    this.speedY = 25;
   }
 
   playAnimation(images) {

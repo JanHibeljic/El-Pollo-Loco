@@ -1,6 +1,6 @@
 class Character extends MoveableObject {
   height = 260;
-  y = 100;
+  y = 170;
   speed = 6;
   IMAGES_WALKING = [
     "img_pollo_locco/img/2_character_pepe/2_walk/W-21.png",
@@ -42,19 +42,19 @@ class Character extends MoveableObject {
       this.walking_sound.pause();
       //walk on canvas
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.x += this.speed;
+        this.moveRight();
         this.otherDirection = false;
         this.walking_sound.play();
       }
 
       if (this.world.keyboard.LEFT && this.x > 0) {
-        this.x -= this.speed;
+        this.moveLeft();
         this.otherDirection = true;
         this.walking_sound.play();
       }
 
-      if (this.world.keyboard.UP) {
-        this.speedY = 20;
+      if (this.world.keyboard.UP && !this.isAboveGround()) {
+        this.jump();
       }
 
       this.world.camera_x = -this.x + 100;
@@ -76,5 +76,7 @@ class Character extends MoveableObject {
     }, 1000 / 60); //ms
   }
 
-  jump() {}
+  jump() {
+    this.speedY = 25;
+  }
 }
