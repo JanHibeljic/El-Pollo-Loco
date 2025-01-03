@@ -18,6 +18,8 @@ class Character extends MoveableObject {
 
     this.loadImages(this.IMAGES_WALKING);
 
+    this.applyGravity();
+
     this.animate();
   }
 
